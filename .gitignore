@@ -1,3 +1,6 @@
+Code.txt
 */*.pdb
 */*.exe
-Code.txt
+*/target
+*/Cargo.lock
+*/Cargo.toml
