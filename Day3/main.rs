@@ -2,12 +2,9 @@ use std::fs;
 
 use regex::Regex;
 
-fn main() {
-    let input_content = fs::read_to_string("./input.txt").expect("Should have been able to read the file.");
+fn pt1(input: String) {
     let re = Regex::new(r"mul\([\d]+,[\d]+\)").unwrap();
-    let matches: Vec<&str> = re.find_iter(input_content.as_str()).map(|m| m.as_str()).collect();
-    println!("Fuck");
-    println!("{:?}", matches);
+    let matches: Vec<&str> = re.find_iter(input.as_str()).map(|m| m.as_str()).collect();
     let mut sum = 0;
     for mut m in matches {
         m = &m[4..(m.len()-1)];  
@@ -17,4 +14,8 @@ fn main() {
         sum += num1 * num2;
     }
     println!("{sum}")
+}
+fn main() {
+    let input_content = fs::read_to_string("./input.txt").expect("Should have been able to read the file.");
+    
 }
