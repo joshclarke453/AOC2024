@@ -15,7 +15,15 @@ fn pt1(input: String) {
     }
     println!("{sum}")
 }
+
+fn pt2(input: String) {
+    let re = Regex::new(r"don't\(\)([^.]*?)do\(\)").unwrap();
+    let matches = re.replace_all(&input, "");
+    pt1(matches.to_string());
+}
+
 fn main() {
     let input_content = fs::read_to_string("./input.txt").expect("Should have been able to read the file.");
-    pt1(input_content);
+    pt1(input_content.clone());
+    pt2(input_content.clone());
 }
