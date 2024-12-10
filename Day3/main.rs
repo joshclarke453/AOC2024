@@ -17,5 +17,5 @@ fn pt1(input: String) {
 }
 fn main() {
     let input_content = fs::read_to_string("./input.txt").expect("Should have been able to read the file.");
-    
+    pt1(input_content);
 }
