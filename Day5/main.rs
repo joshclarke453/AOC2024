@@ -15,8 +15,8 @@ fn main() {
     let input_content =
         fs::read_to_string("./input.txt").expect("Should have been able to read the file.");
     let input_lines = input_content.lines();
-    let mut bad_count = 0;
     let mut good_middle_sum = 0;
+    let mut bad_middle_sum = 0;
     for line in input_lines {
         let split_in: Vec<&str> = line.split(",").collect();
         let mut vec_in: Vec<i32> = Vec::new();
@@ -26,39 +26,36 @@ fn main() {
 
         let mut bad = false;
         for j in 0..vec_in.len() {
-            if bad {
-                break;
-            }
             for k in 0..vec_in.len() {
-                if bad {
-                    break;
-                }
                 if j == k {
                     continue;
                 }
 
+                let mut cloned = vec_in.clone();
                 for r in &rules_vec {
-                    if vec_in[j] == r[0] && vec_in[k] == r[1] {
+                    if cloned[j] == r[0] && cloned[k] == r[1] {
                         if j > k {
                             bad = true;
-                            break;
+                            cloned.swap(j, k);
                         };
-                    } else if vec_in[j] == r[1] && vec_in[j] == r[0] {
+                    } else if cloned[j] == r[1] && cloned[j] == r[0] {
+                        println!("{:?}", r);
                         if k > j {
                             bad = true;
-                            break;
+                            cloned.swap(j, k);
                         }
                     }
                 }
+                vec_in = cloned;
             }
         }
 
         if bad {
-            bad_count += 1;
+            bad_middle_sum += vec_in[vec_in.len() / 2];
         } else {
             good_middle_sum += vec_in[vec_in.len() / 2];
         }
     }
-    println!("Bad Count: {bad_count}");
     println!("Good Middle Values: {good_middle_sum}");
+    println!("Bad Middle Values: {bad_middle_sum}");
 }
