@@ -59,6 +59,6 @@ fn main() {
             good_middle_sum += vec_in[vec_in.len() / 2];
         }
     }
-    println!("{bad_count}");
-    println!("{good_middle_sum}");
+    println!("Bad Count: {bad_count}");
+    println!("Good Middle Values: {good_middle_sum}");
 }
